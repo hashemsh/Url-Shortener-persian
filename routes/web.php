@@ -13,7 +13,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','controller@main');
 Route::post('/','controller@create');
+Route::any('/{any}','controller@index');
+
