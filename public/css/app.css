@@ -2,3 +2,12 @@ body{
     direction: rtl;
     font-family: IRANSans;
 }
+form label {
+    font-size: 40px;
+    background-color: #00AAAA;
+    color: #fff;
+    padding: 10px 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
