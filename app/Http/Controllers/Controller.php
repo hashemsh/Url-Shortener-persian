@@ -25,10 +25,16 @@ class Controller extends BaseController
             $short_url = $record->short_url;
             return view('result',compact('short_url'));
         }
+        $short_url = Url::get_unique_short_url();
+        dd($short_url);
     }
 
     public function index($any)
     {
-        dd($any);
+       $row = Url::where('short_url',$any)->first();
+       if (!$row){
+           return redirect()->to('/');
+       }
+       return redirect()->to($row->url);
     }
 }
