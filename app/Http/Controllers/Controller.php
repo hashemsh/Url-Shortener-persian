@@ -24,7 +24,7 @@ class Controller extends BaseController
             'url' => 'required|url'
         ],[
             'url.required' => 'لینک خود را وارد کنید',
-            'url.url' => 'لینک شما معتبر نیست'
+            'url.url' => 'لینک شما معتبر نیست',
         ]);
 
         $record = Url::whereurl($url)->first();
@@ -32,7 +32,11 @@ class Controller extends BaseController
             $short_url = $record->short_url;
             return view('result',compact('short_url'));
         }
-        $short_url = Url::get_unique_short_url();
+        if($request->input('specialUrl')){
+            $short_url = $request->input('specialUrl');
+        }else{
+            $short_url = Url::get_unique_short_url();
+        }
         $make_short_url = Url::create([
             'url' => $url,
             'short_url' => $short_url
@@ -44,10 +48,10 @@ class Controller extends BaseController
 
     public function index($any)
     {
-       $row = Url::where('short_url',$any)->first();
-       if (!$row){
-           return redirect()->to('/');
-       }
-       return redirect()->to($row->url);
+        $row = Url::where('short_url',$any)->first();
+        if (!$row){
+            return redirect()->to('/');
+        }
+        return redirect()->to($row->url);
     }
 }
